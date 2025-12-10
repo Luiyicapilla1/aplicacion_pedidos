@@ -1,0 +1,19 @@
+{
+  "name": "lgc/aplicacion_pedidos",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "luis",
+      "email": "luisgarciacapilla1@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "lgc\\aplicacion_pedidos\\": "src"
+    }
+  },
+  "require": {
+  }
+}
