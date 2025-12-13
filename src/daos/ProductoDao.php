@@ -4,11 +4,10 @@ use lgc\aplicacion_pedidos\models\Producto;
 use lgc\aplicacion_pedidos\tools\Conexion;
 
 class ProductoDao{
-    public static function get_by_id($id){
+    protected static function get_by_category($id){
         $bd_connection = Conexion::getConexion();
-        $query = "SELECT * FROM productos WHERE cod_prod = '$id'";
+        $query = "SELECT * FROM productos WHERE categoria = '$id'";
         $stmt = $bd_connection->query($query);
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, Producto::class);
-        return $stmt->fetch();
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Producto::class) ?? null;
     }
 }

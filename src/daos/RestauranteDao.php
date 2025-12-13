@@ -1,5 +1,5 @@
 <?php
-namespace  lgc\aplicacion_pedidos\daos;
+namespace lgc\aplicacion_pedidos\daos;
 use lgc\aplicacion_pedidos\models\Restaurante;
 use lgc\aplicacion_pedidos\tools\Conexion;
 class RestauranteDao

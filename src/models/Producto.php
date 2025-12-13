@@ -3,7 +3,7 @@ namespace lgc\aplicacion_pedidos\models;
 
 class Producto
 {
-    private $cod_prod;
+    public $cod_prod;
     private $nombre;
     private $descripcion;
     private $peso;
