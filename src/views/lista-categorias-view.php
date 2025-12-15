@@ -18,9 +18,9 @@ if (!isset($_SESSION['user'])){
 <body>
     <section>
         <ul>
-            <li class="user-info">Usuario: <?= $_SESSION['user'] ?></li>
+            <li class="user-info">Usuario:<?= $_SESSION['user'] ?></li>
             <li><a href="/aplicacion_pedidos/public/lista-categorias">Home</a></li>
-            <li><a href="#">Ver Carrito</a></li>
+            <li><a href="/aplicacion_pedidos/public/carrito-view">Ver Carrito</a></li>
             <li><a href="#">Cerrar Sesión</a></li>
         </ul>
     </section>
