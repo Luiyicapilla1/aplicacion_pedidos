@@ -16,6 +16,7 @@
   },
   "require": {
     "vlucas/phpdotenv": "@stable",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "phpmailer/phpmailer": ">=v7.0.1"
   }
 }

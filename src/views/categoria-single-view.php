@@ -8,8 +8,11 @@ if (!isset($_SESSION['user'])){
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $_SESSION['carrito'][$_POST['id_producto']] = $_POST['cantidad'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cantidad'] && $_POST['id_producto'] ){
+    if (!isset($_SESSION['carrito'][$_POST['id_producto']])){
+        $_SESSION['carrito'][$_POST['id_producto']] = 0;
+    }
+    $_SESSION['carrito'][$_POST['id_producto']] += $_POST['cantidad'];
     print_r($_SESSION);
 }
 
@@ -31,7 +34,7 @@ $producto_controller = new ProductoController();
         <ul>
             <li class="user-info">Usuario:<?= $_SESSION['user'] ?></li>
             <li><a href="/aplicacion_pedidos/public/lista-categorias">Home</a></li>
-            <li><a href="/aplicacion_pedidos/public/carrito-view">Ver Carrito</a></li>
+            <li><a href="/aplicacion_pedidos/public/carrito">Ver Carrito</a></li>
             <li><a href="#">Cerrar Sesión</a></li>
         </ul>
     </section>
