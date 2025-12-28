@@ -10,13 +10,14 @@ if (!isset($_SESSION['user'])){
     exit();
 }
 
-$data = $_SESSION['carrito'];
+
 $producto_controller = new ProductoController();
 $carrito_array = [];
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_producto'])){
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cantidad_disminuir'])) {
     $_SESSION['carrito'][$_POST['num_producto']] -= $_POST['cantidad_disminuir'];
 }
-foreach ($data as $product_key => $product_value) {
+foreach ($_SESSION['carrito'] as $product_key => $product_value) {
     $carrito_array[$product_key] = [
         "cantidad" => $product_value,
         "producto" => $producto_controller->get_product_by_id($product_key),

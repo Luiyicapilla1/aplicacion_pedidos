@@ -9,11 +9,11 @@ class MailsController{
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp.example.com';
+            $mail->Host       = 'sandbox.smtp.mailtrap.io';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'user@example.com';
-            $mail->Password   = 'secret';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Username   = 'b6fc81965e1baa';
+            $mail->Password   = '36946466334838';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 465;
 
             //Recipients
