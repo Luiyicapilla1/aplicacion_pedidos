@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 class MailsController{
-    public function send_mail($remitente, $destinatario){
+    public function send_mail($destinatario, $asunto, $cuerpo){
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
@@ -17,14 +17,14 @@ class MailsController{
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom($remitente, 'Mailer');
-            $mail->addAddress($destinatario, 'Joe User');
+            $mail->setFrom('luisgarciacapilla1@gmail.com');
+            $mail->addAddress($destinatario);
 
             //Content
             $mail->isHTML(true);
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->Subject = $asunto;
+            $mail->Body    = $cuerpo;
+            $mail->AltBody = $cuerpo;
 
             $mail->send();
         } catch (Exception $e) {

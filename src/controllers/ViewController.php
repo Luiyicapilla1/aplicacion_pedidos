@@ -15,8 +15,8 @@ class ViewController
             if (file_exists('../src/views/' . $view_url . '-view.php')){
                 return include_once '../src/views/' .$view_url . '-view.php';
             }else{
-                foreach ($this->categories_data as $data){
-                    if ($data->getSlug() . "?id=" . $data->getCodCat() == $view_url){
+                foreach ($this->categories_data as $categoria){
+                    if ($categoria->getSlug() . "?id=" . $categoria->getCodCat() == $view_url){
                        return include_once '../src/views/categoria-single-view.php';
                     }
                 }

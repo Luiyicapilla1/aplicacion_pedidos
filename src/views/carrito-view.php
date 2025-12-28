@@ -10,26 +10,28 @@ if (!isset($_SESSION['user'])){
     exit();
 }
 
-
 $producto_controller = new ProductoController();
 $carrito_array = [];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cantidad_disminuir'])) {
-    $_SESSION['carrito'][$_POST['num_producto']] -= $_POST['cantidad_disminuir'];
-}
-foreach ($_SESSION['carrito'] as $product_key => $product_value) {
-    $carrito_array[$product_key] = [
-        "cantidad" => $product_value,
-        "producto" => $producto_controller->get_product_by_id($product_key),
-        "id_producto" => $product_key,
-    ];
+if (isset($_SESSION['carrito'])){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cantidad_disminuir'])) {
+        $_SESSION['carrito'][$_POST['num_producto']] -= $_POST['cantidad_disminuir'];
+    }
+    foreach ($_SESSION['carrito'] as $product_key => $product_value) {
+        $carrito_array[$product_key] = [
+                "cantidad" => $product_value,
+                "producto" => $producto_controller->get_product_by_id($product_key),
+                "id_producto" => $product_key,
+        ];
+    }
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pedir_true'])){
     $pedido_producto = new PedidoProductoDao();
     $pedido_producto->set_productos_pedido($_SESSION['user'],$carrito_array);
     $mailer = new MailsController();
-    $mailer->send_mail('luisgarciacapilla1@gmail.com', 'luisgarciacapilla1@gmail.com');
+    $mailer->send_mail($_SESSION['user'],'Pedido Comida', 'Pedido de comida realizado con exito');
+    $mailer->send_mail('luisgarciacapilla1@gmail.com','Pedido Comida', 'Pedido de comida realizado por ' . $_SESSION['user']);
 }
 ?>
 <!doctype html>
@@ -37,6 +39,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pedir_true'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles/carrito.css">
     <title>Carrito</title>
 </head>
 <body>
@@ -74,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pedir_true'])){
             ?>
         </table>
     </main>
-    <section>
+    <section class="pedido">
         <form method="post" action="">
             <input type="hidden" name="pedir_true">
             <input type="submit" name="Pedir" id="Pedir">
