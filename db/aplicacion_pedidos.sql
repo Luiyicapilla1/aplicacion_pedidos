@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-12-2025 a las 16:41:35
+-- Tiempo de generación: 07-01-2026 a las 20:22:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,7 +39,9 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`cod_categoria`, `nombre_cat`, `descripcion`, `slug`) VALUES
-(1, 'Bebidas con', 'Bebidas con alcohol', 'bebidas-con-alcohol');
+(1, 'Bebidas con', 'Bebidas con alcohol', 'bebidas-con-alcohol'),
+(2, 'Bebidas sin', 'Bebidas sin alcohol', 'bebidas-sin-alcohol'),
+(3, 'Comida', 'Productos alimenticios', 'comida');
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,10 @@ CREATE TABLE `pedidos` (
 INSERT INTO `pedidos` (`cod_ped`, `fecha`, `enviado`, `restaurante`) VALUES
 (19, '2025-12-19', 1, 1),
 (20, '2025-12-23', 1, 1),
-(21, '2025-12-23', 1, 1);
+(21, '2025-12-23', 1, 1),
+(22, '2025-12-28', 1, 1),
+(23, '2025-12-28', 1, 1),
+(24, '2025-12-28', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -82,7 +87,10 @@ CREATE TABLE `pedidosproductos` (
 
 INSERT INTO `pedidosproductos` (`cod_ped_prod`, `pedido`, `producto`, `unidades`) VALUES
 (1, 21, 1, 4),
-(2, 21, 2, 7);
+(2, 21, 2, 7),
+(3, 22, 1, 2),
+(4, 23, 1, 2),
+(5, 24, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -104,8 +112,36 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`cod_prod`, `nombre`, `descripcion`, `peso`, `stock`, `categoria`) VALUES
-(1, 'patata', 'una patata', 0.5, 10, 1),
-(2, 'cocacola', 'una cocacola', 1, 20, 1);
+(3, 'Cerveza Estrella Galicia', 'Cerveza lager española 330ml', 0.33, 120, 1),
+(4, 'Cerveza Mahou Clásica', 'Cerveza rubia lata 330ml', 0.33, 110, 1),
+(5, 'Cerveza Heineken', 'Cerveza premium holandesa 330ml', 0.33, 95, 1),
+(6, 'Vino Tinto Rioja', 'Vino tinto D.O. Rioja 750ml', 0.75, 60, 1),
+(7, 'Vino Blanco Albariño', 'Vino blanco gallego 750ml', 0.75, 55, 1),
+(8, 'Whisky Johnnie Walker Red', 'Whisky escocés blended 700ml', 0.7, 40, 1),
+(9, 'Whisky Ballantines', 'Whisky escocés 700ml', 0.7, 38, 1),
+(10, 'Gin Bombay Sapphire', 'Ginebra premium inglesa 700ml', 0.7, 35, 1),
+(11, 'Ron Barceló', 'Ron dominicano añejo 700ml', 0.7, 42, 1),
+(12, 'Vodka Absolut', 'Vodka sueco 700ml', 0.7, 50, 1),
+(13, 'Agua Mineral Font Vella', 'Agua mineral natural 1.5L', 1.5, 200, 2),
+(14, 'Agua Bezoya', 'Agua mineral 1.5L', 1.5, 180, 2),
+(15, 'Coca-Cola', 'Refresco de cola lata 330ml', 0.33, 300, 2),
+(16, 'Coca-Cola Zero', 'Refresco sin azúcar lata 330ml', 0.33, 250, 2),
+(17, 'Fanta Naranja', 'Refresco sabor naranja 330ml', 0.33, 210, 2),
+(18, 'Sprite', 'Refresco lima-limón 330ml', 0.33, 190, 2),
+(19, 'Zumo de Naranja Granini', 'Zumo de naranja 1L', 1, 90, 2),
+(20, 'Zumo Multifrutas Don Simón', 'Zumo multifrutas 1L', 1, 85, 2),
+(21, 'Red Bull', 'Bebida energética 250ml', 0.25, 150, 2),
+(22, 'Nestea Limón', 'Té frío sabor limón 330ml', 0.33, 170, 2),
+(23, 'Pizza Margarita', 'Pizza clásica con tomate y mozzarella', 0.45, 50, 3),
+(24, 'Pizza Barbacoa', 'Pizza con carne y salsa barbacoa', 0.5, 45, 3),
+(25, 'Hamburguesa de Ternera', 'Hamburguesa 100% ternera', 0.3, 70, 3),
+(26, 'Hamburguesa de Pollo', 'Hamburguesa de pollo crujiente', 0.28, 65, 3),
+(27, 'Pasta Carbonara', 'Pasta con salsa carbonara', 0.4, 40, 3),
+(28, 'Pasta Boloñesa', 'Pasta con salsa de carne', 0.42, 42, 3),
+(29, 'Ensalada César', 'Ensalada con pollo y salsa césar', 0.35, 60, 3),
+(30, 'Ensalada Mixta', 'Ensalada con verduras frescas', 0.3, 55, 3),
+(31, 'Lasaña de Carne', 'Lasaña tradicional de carne', 0.45, 35, 3),
+(32, 'Sándwich Mixto', 'Sándwich de jamón y queso', 0.25, 80, 3);
 
 -- --------------------------------------------------------
 
@@ -172,25 +208,25 @@ ALTER TABLE `restaurantes`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `cod_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cod_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `cod_ped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `cod_ped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidosproductos`
 --
 ALTER TABLE `pedidosproductos`
-  MODIFY `cod_ped_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cod_ped_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `cod_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cod_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `restaurantes`

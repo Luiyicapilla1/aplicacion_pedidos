@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cantidad'] && $_POST['id_pro
         $_SESSION['carrito'][$_POST['id_producto']] = 0;
     }
     $_SESSION['carrito'][$_POST['id_producto']] += $_POST['cantidad'];
-    print_r($_SESSION);
 }
 
 $categoria_controller = new CategoriaController();
